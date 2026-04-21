@@ -1,0 +1,13 @@
+include("lib/serial.bzg");
+
+var list = serial_list();
+
+if(sizeof(list)){
+    print("Serial Ports:");
+    for(a =0; a<sizeof(list); a++){
+        print("port: "+ list[a]);
+    }
+}
+else{
+    print("No serial ports found");
+}
