@@ -1,0 +1,17 @@
+include("lib/serial.bzg");
+
+var serial = serial_init("COM6", 9600);
+
+if(serial> 0){
+  for(var a=0; a<10; a++){
+      var data = serial_read(serial);
+
+      if(sizeof(data)){
+          print(data);
+          serial_write(serial, data);
+      } 
+  }
+}
+else{
+   print("Serial not connected");
+}
