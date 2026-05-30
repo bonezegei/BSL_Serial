@@ -1,0 +1,45 @@
+/*
+    Serial Basics
+    Author: Jofel Batutay (Bonezegei)
+    Date: May 31, 2026
+*/
+
+include("lib/serial.bzg");
+
+// Create our object instance
+var serial = serialMgr();
+
+// Connect using the instance method
+var status = serial.connect("COM4", 115200);
+
+if(status==true){
+    print("Serial connected");
+}
+else{
+    print("Serial connection failed");
+}
+
+for (var a = 0; a < 4; a++) {
+    // Read and Write directly on the object (no handle tracking)
+    var data = serial.read();
+    
+    if (sizeof(data)) {
+        print(data);
+        serial.write(data);
+    }
+    gc();
+}
+
+print("list");
+
+// List is bound to the object too (acts like a namespace/class function here)
+var list = serial.list();
+
+if (sizeof(list)) {
+    for (var a = 0; a < sizeof(list); a++) {
+        print("ports:" + list[a]);
+    }
+}
+
+// Ensure resources are safely closed when finished
+serial.close();
